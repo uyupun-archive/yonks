@@ -6,3 +6,11 @@ export interface PageProps {
     key: string;
   };
 }
+
+export interface FetchOptions {
+  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+  headers?: {
+    'Content-Type': string;
+  };
+  body?: string;
+}
