@@ -30,10 +30,12 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.4.1",
+    "react-native-dotenv": "^3.2.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
+    "swr": "^1.0.1",
     "typescript": "^4.4.4"
   },
   "private": true
