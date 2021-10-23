@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import logo from '../assets/logo.png';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { PageProps } from '../types';
 
 const Register = (props: PageProps) => {
@@ -9,6 +10,7 @@ const Register = (props: PageProps) => {
   return (
     <View style={styles.container}>
       <Text>Register page</Text>
+      <Image source={logo} style={styles.logo} />
       <Button title={'ログイン画面へ'} onPress={() => navigation.navigate('Login')} />
       <Button title={'新規登録画面へ'} onPress={() => navigation.navigate('Register')} />
       <Button title={'フレンド画面へ'} onPress={() => navigation.navigate('Friends')} />
@@ -26,6 +28,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
+  logo: {
+    width: 250,
+    height: 130,
+  }
 });
 
 export { Register };

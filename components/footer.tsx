@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { color } from '../constants';
 import { PageProps } from '../types';
 
@@ -15,7 +15,7 @@ const Footer = (props: FooterProps) => {
   return (
     <View style={styles.footer}>
       <Ionicons
-        name={'person'}
+        name={'people'}
         size={24}
         color={active === 'friends' ? color.orange : color.lightOrange}
         onPress={() => {
@@ -23,8 +23,8 @@ const Footer = (props: FooterProps) => {
           navigation.navigate('Friends');
         }}
       />
-      <Ionicons
-        name={'person'}
+      <FontAwesome
+        name={'bell'}
         size={24}
         color={active === 'notice' ? color.orange : color.lightOrange}
         onPress={() => {
