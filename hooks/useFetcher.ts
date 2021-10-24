@@ -5,7 +5,10 @@ import { FetchOptions } from '../types';
 
 export const useFetcher = (path: string, options?: FetchOptions) => {
   const { data, error } = useSWR(`${YONKS_API}${path}`, (url: string) =>
-    fetcher(url, options || {}),
+    fetcher(
+      url,
+      options || { headers: { Accept: 'application/json', 'Content-Type': 'application/json' } },
+    ),
   );
 
   return {

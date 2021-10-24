@@ -18,40 +18,13 @@ interface Data {
 const Notice = (props: PageProps) => {
   const { navigation } = props;
   // TODO: APIリクエスト
-  // const { data, isLoading, isError } = useFetcher('');
+  const { data, isLoading, isError } = useFetcher('notifications');
 
-  const data = [
-    {
-      name: '山田太郎',
-      address: {
-        line: 'test',
-        twitter: 'test',
-      },
-    },
-    {
-      name: '山田太郎',
-      address: {
-        line: 'test',
-        twitter: 'test',
-      },
-    },
-    {
-      name: '山田太郎',
-      address: {
-        line: 'test',
-        twitter: 'test',
-      },
-    },
-  ];
-
-  const getNoticeList = (data: Data[]) => {
-    return data.map((item, index: number) => {
+  const getNoticeList = (data: any) => {
+    return data?.map((item: any, index: number) => {
       return (
         <View key={index} style={styles.notice}>
-          <Text style={styles.text}>{item.name}さんとマッチしました。</Text>
-          <Text style={styles.text}>{item.name}さんの連絡先</Text>
-          {item.address.line && <Text style={styles.text}>LINE: {item.address.line}</Text>}
-          {item.address.twitter && <Text style={styles.text}>Twitter: {item.address.twitter}</Text>}
+          <Text style={styles.text}>{item.content}</Text>
         </View>
       );
     });
@@ -59,14 +32,22 @@ const Notice = (props: PageProps) => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>通知</Text>
-        <ScrollView>
-          {getNoticeList(data)}
-          <StatusBar style='auto' />
-        </ScrollView>
-      </SafeAreaView>
-      <Footer active={'notice'} navigation={navigation} />
+      {isLoading ? (
+        <SafeAreaView style={styles.loadingContainer}>
+          <Text>ローディング中...</Text>
+        </SafeAreaView>
+      ) : (
+        <>
+          <SafeAreaView style={styles.container}>
+            <Text style={styles.header}>通知</Text>
+            <ScrollView>
+              {getNoticeList(data)}
+              <StatusBar style='auto' />
+            </ScrollView>
+          </SafeAreaView>
+          <Footer active={'notice'} navigation={navigation} />
+        </>
+      )}
     </>
   );
 };
@@ -75,6 +56,12 @@ const noticeWidth = Dimensions.get('window').width - 40;
 const scrollViewHeight = Dimensions.get('window').height - 100;
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: color.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: color.white,
