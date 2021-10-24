@@ -25,20 +25,7 @@ interface Data {
 const Friends = (props: PageProps) => {
   const { navigation } = props;
   // TODO: APIリクエスト
-  // const { data, isLoading, isError } = useFetcher('');
-
-  const data: Data[] = [
-    {
-      userId: 'test1',
-      name: '山田太郎',
-      status: '1',
-    },
-    {
-      userId: 'test2',
-      name: '山田太郎',
-      status: '2',
-    },
-  ];
+  const { data, isLoading, isError } = useFetcher('friends');
 
   const [searchText, setSearchText] = useState<string>('');
 
@@ -46,16 +33,20 @@ const Friends = (props: PageProps) => {
     console.log(searchText);
   };
 
-  const getFriends = (data: Data[]) => {
-    return data.map((item, index) => {
-      const badgeStyle =
-        item.status === '1' ? 'badgeRed' : item.status === '2' ? 'badgeGreen' : 'badgeBlue';
+  const getFriends = (data: any) => {
+    console.log(data);
+    return data?.map((item: any, index: number) => {
+      let badgeStyle: 'badgeRed' | 'badgeGreen' | 'badgeBlue' = 'badgeRed';
+      if (item.user.status.id !== 1) {
+        badgeStyle = item.user.status.id === 2 ? 'badgeGreen' : 'badgeBlue';
+      }
+
       return (
         <View key={index} style={styles.friend}>
           <Text>
-            {item.name}（@{item.userId}）
+            {item.user.name}（{item.user.user_id}）
           </Text>
-          <Text style={styles[badgeStyle]}>{status[item.status]}</Text>
+          <Text style={styles[badgeStyle]}>{item.user.status.name}</Text>
         </View>
       );
     });
@@ -63,24 +54,32 @@ const Friends = (props: PageProps) => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>友だち</Text>
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.searchArea}>
-            <TextInput style={styles.input} onChangeText={setSearchText} value={searchText} />
-            <TouchableOpacity
-              onPress={() => search()}
-              style={searchText ? styles.button : styles.buttonDisabled}
-              disabled={!searchText}
-            >
-              <Text>友だち追加</Text>
-            </TouchableOpacity>
-          </View>
-          {getFriends(data)}
-          <StatusBar style='auto' />
-        </ScrollView>
-      </SafeAreaView>
-      <Footer active={'friends'} navigation={navigation} />
+      {isLoading ? (
+        <SafeAreaView style={styles.loadingContainer}>
+          <Text>ローディング中...</Text>
+        </SafeAreaView>
+      ) : (
+        <>
+          <SafeAreaView style={styles.container}>
+            <Text style={styles.header}>友だち</Text>
+            <ScrollView style={styles.scrollView}>
+              <View style={styles.searchArea}>
+                <TextInput style={styles.input} onChangeText={setSearchText} value={searchText} />
+                <TouchableOpacity
+                  onPress={() => search()}
+                  style={searchText ? styles.button : styles.buttonDisabled}
+                  disabled={!searchText}
+                >
+                  <Text>友だち追加</Text>
+                </TouchableOpacity>
+              </View>
+              {getFriends(data)}
+              <StatusBar style='auto' />
+            </ScrollView>
+          </SafeAreaView>
+          <Footer active={'friends'} navigation={navigation} />
+        </>
+      )}
     </>
   );
 };
@@ -88,6 +87,12 @@ const Friends = (props: PageProps) => {
 const scrollViewHeight = Dimensions.get('window').height - 100;
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: color.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
