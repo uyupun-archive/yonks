@@ -8,3 +8,9 @@ export const color = {
   lightGray: '#c3c3c3',
   white: '#ffffff',
 } as const;
+
+export const status = {
+  '1': 'いそがしい',
+  '2': 'どっちでも',
+  '3': '人肌恋しい',
+};
