@@ -48,7 +48,7 @@ const Register = (props: PageProps) => {
       >
         <Text>新規登録</Text>
       </TouchableOpacity>
-      <Button title={'ログインする'} onPress={() => navigation.navigate('Register')} />
+      <Button title={'ログインする'} onPress={() => navigation.navigate('Login')} />
       <StatusBar style='auto' />
     </SafeAreaView>
   );
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
+    marginBottom: 4,
   },
   input: {
     width: inputWidth,

@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
+    marginBottom: 4,
   },
   input: {
     width: inputWidth,
