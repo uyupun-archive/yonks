@@ -14,23 +14,24 @@ import {
 } from 'react-native';
 import { PageProps } from '../types';
 import { color } from '../constants';
-import { fetcher } from '../utilities/fetcher';
+import { post } from '../utilities/fetcher';
 
 const Login = (props: PageProps) => {
   const { navigation } = props;
 
-  const [text, setText] = useState<string>('');
+  const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const login = async () => {
     try {
-      // TODO: APIリクエスト
-      // const res = await fetcher('', { method: 'POST' });
-      // const data = await res.json();
-      // console.log(data);
+      await post('auth/login', {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId, password }),
+      });
       navigation.navigate('Friends');
     } catch (error) {
-      console.error('エラーです');
+      console.log(error);
     }
   };
 
@@ -38,13 +39,13 @@ const Login = (props: PageProps) => {
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <Text style={styles.label}>ユーザID</Text>
-      <TextInput style={styles.input} onChangeText={setText} value={text} />
+      <TextInput style={styles.input} onChangeText={setUserId} value={userId} />
       <Text style={styles.label}>パスワード</Text>
       <TextInput secureTextEntry style={styles.input} onChangeText={setPassword} value={password} />
       <TouchableOpacity
         onPress={() => login()}
-        style={text && password ? styles.button : styles.buttonDisabled}
-        disabled={!(text && password)}
+        style={userId && password ? styles.button : styles.buttonDisabled}
+        disabled={!(userId && password)}
       >
         <Text>ログイン</Text>
       </TouchableOpacity>

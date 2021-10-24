@@ -10,7 +10,8 @@ export interface PageProps {
 export interface FetchOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   headers?: {
-    'Content-Type': string;
+    Accept?: string;
+    'Content-Type'?: string;
   };
   body?: string;
 }
