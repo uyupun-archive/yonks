@@ -11,3 +11,18 @@ $ yarn
 
 $ yarn start
 ```
+
+## ブランド情報
+
+### ロゴ
+
+通常
+![logo.png](assets/logo.png)
+
+背景透過
+![logo-toransparent.png](assets/logo-transparent.png)
+
+### カラーコード
+
+- キーカラー
+  - #F15A24
