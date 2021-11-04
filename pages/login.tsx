@@ -34,13 +34,28 @@ const Login = (props: PageProps) => {
           <Text fontSize={'md'} mb={1}>
             ユーザID
           </Text>
-          <Input size='lg' onChangeText={setText} value={text} />
+          <Input
+            size='lg'
+            _focus={{
+              borderColor: 'orange.500',
+            }}
+            onChangeText={setText}
+            value={text}
+          />
         </Box>
         <Box mb={8}>
           <Text fontSize={'md'} mb={1}>
             パスワード
           </Text>
-          <Input type={'password'} size='lg' onChangeText={setPassword} value={password} />
+          <Input
+            type={'password'}
+            size='lg'
+            _focus={{
+              borderColor: 'orange.500',
+            }}
+            onChangeText={setPassword}
+            value={password}
+          />
         </Box>
         <Center>
           <Button
