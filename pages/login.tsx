@@ -71,10 +71,14 @@ const Login = (props: PageProps) => {
             _text={{
               color: 'white',
               fontSize: 'md',
+              fontWeight: 'bold',
             }}
             w={'50%'}
             mb={8}
             isDisabled={!(text && password)}
+            _disabled={{
+              backgroundColor: 'orange.300',
+            }}
             onPress={() => login()}
           >
             ログイン
