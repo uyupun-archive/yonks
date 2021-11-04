@@ -28,7 +28,15 @@ const Login = (props: PageProps) => {
     <Box flex={1} px={8} bg={'white'} safeArea>
       <ScrollView>
         <Center mb={4}>
-          <Image source={logo} alt={'yonks logo'} w={250} h={130} mt={'20%'} mb={12} />
+          <Image
+            source={logo}
+            alt={'yonks logo'}
+            w={'100%'}
+            h={130}
+            resizeMode={'contain'}
+            mt={'20%'}
+            mb={12}
+          />
         </Center>
         <Box mb={4}>
           <Text fontSize={'md'} mb={1}>
