@@ -2,18 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import logo from '../assets/logo.png';
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  Button,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Dimensions,
-} from 'react-native';
+import { ScrollView, Box, Center, Button, Text, Input, Image, Heading } from 'native-base';
 import { PageProps } from '../types';
-import { color } from '../constants';
 import { fetcher } from '../utilities/fetcher';
 
 const Register = (props: PageProps) => {
@@ -28,74 +18,89 @@ const Register = (props: PageProps) => {
       // const res = await fetcher('', { method: 'POST' });
       // const data = await res.json();
       // console.log(data);
-      navigation.navigate('Profile');
+      navigation.navigate('Friends');
     } catch (error) {
       console.error('エラーです');
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Image source={logo} style={styles.logo} />
-      <Text style={styles.label}>ユーザID</Text>
-      <TextInput style={styles.input} onChangeText={setText} value={text} />
-      <Text style={styles.label}>パスワード</Text>
-      <TextInput secureTextEntry style={styles.input} onChangeText={setPassword} value={password} />
-      <TouchableOpacity
-        onPress={() => register()}
-        style={text && password ? styles.button : styles.buttonDisabled}
-        disabled={!(text && password)}
-      >
-        <Text>新規登録</Text>
-      </TouchableOpacity>
-      <Button title={'ログインする'} onPress={() => navigation.navigate('Login')} />
-      <StatusBar style='auto' />
-    </SafeAreaView>
+    <Box flex={1} px={8} bg={'white'} safeArea>
+      <ScrollView>
+        <Center mb={4}>
+          <Image
+            source={logo}
+            alt={'yonks logo'}
+            w={'100%'}
+            h={120}
+            resizeMode={'contain'}
+            mt={'15%'}
+            mb={8}
+          />
+          <Heading mb={6}>新規登録</Heading>
+        </Center>
+        <Box mb={4}>
+          <Text fontSize={'md'} mb={1}>
+            ユーザID
+          </Text>
+          <Input
+            size='lg'
+            _focus={{
+              borderColor: 'orange.500',
+            }}
+            onChangeText={setText}
+            value={text}
+          />
+        </Box>
+        <Box mb={8}>
+          <Text fontSize={'md'} mb={1}>
+            パスワード
+          </Text>
+          <Input
+            type={'password'}
+            size='lg'
+            _focus={{
+              borderColor: 'orange.500',
+            }}
+            onChangeText={setPassword}
+            value={password}
+          />
+        </Box>
+        <Center>
+          <Button
+            colorScheme={'orange'}
+            _text={{
+              color: 'white',
+              fontSize: 'md',
+              fontWeight: 'bold',
+            }}
+            w={'50%'}
+            mb={8}
+            isDisabled={!(text && password)}
+            _disabled={{
+              backgroundColor: 'orange.300',
+            }}
+            onPress={() => register()}
+          >
+            新規登録
+          </Button>
+          <Button
+            variant={'link'}
+            colorScheme={'blue'}
+            _text={{
+              fontSize: 'md',
+              fontWeight: 'normal',
+              underline: true,
+            }}
+            onPress={() => navigation.navigate('Login')}
+          >
+            ログインする
+          </Button>
+        </Center>
+        <StatusBar style='auto' />
+      </ScrollView>
+    </Box>
   );
 };
-
-const inputWidth = Dimensions.get('window').width - 40;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.white,
-    alignItems: 'center',
-  },
-  logo: {
-    width: 250,
-    height: 130,
-    marginTop: 72,
-    marginBottom: 64,
-  },
-  label: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 20,
-    marginBottom: 4,
-  },
-  input: {
-    width: inputWidth,
-    height: 40,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: color.lightGray,
-    borderRadius: 4,
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: color.orange,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
-    borderRadius: 5,
-    marginBottom: 12,
-  },
-  buttonDisabled: {
-    backgroundColor: color.lightOrange,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
-    borderRadius: 5,
-    marginBottom: 12,
-  },
-});
 
 export { Register };
