@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import logo from '../assets/logo.png';
-import { ScrollView, Box, Center, Button, Text, Input, Image } from 'native-base';
+import { ScrollView, Box, Center, Button, Text, Input, Image, Heading } from 'native-base';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
 
@@ -32,11 +32,12 @@ const Login = (props: PageProps) => {
             source={logo}
             alt={'yonks logo'}
             w={'100%'}
-            h={130}
+            h={120}
             resizeMode={'contain'}
-            mt={'20%'}
-            mb={12}
+            mt={'15%'}
+            mb={8}
           />
+          <Heading mb={6}>ログイン</Heading>
         </Center>
         <Box mb={4}>
           <Text fontSize={'md'} mb={1}>
