@@ -25,8 +25,8 @@ const Login = (props: PageProps) => {
   };
 
   return (
-    <Box flex={1} px={8} bg={'white'} safeArea>
-      <ScrollView>
+    <Box flex={1} bg={'white'} safeArea>
+      <ScrollView _contentContainerStyle={{ px: 8 }}>
         <Center mb={4}>
           <Image
             source={logo}
