@@ -4,7 +4,7 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { PageProps } from '../types';
 
 interface FooterProps {
-  active: 'friends' | 'notice' | 'profile';
+  active: 'friends' | 'notice' | 'profile' | 'settings';
   navigation: PageProps['navigation'];
 }
 
@@ -13,12 +13,14 @@ const Footer = (props: FooterProps) => {
 
   return (
     <HStack
-      space={3}
+      space={4}
       bg={'white'}
       py={4}
       borderColor='gray.300'
       borderTopWidth={1}
       alignItems='center'
+      position='absolute'
+      bottom={0}
       safeAreaBottom
     >
       <Pressable
@@ -55,6 +57,18 @@ const Footer = (props: FooterProps) => {
       >
         <Center>
           <Icon as={<Ionicons name={'person'} />} color={'orange.500'} size='sm' />
+        </Center>
+      </Pressable>
+      <Pressable
+        flex={1}
+        opacity={active === 'settings' ? 1 : 0.5}
+        onPress={() => {
+          if (active === 'settings') return;
+          navigation.navigate('Settings');
+        }}
+      >
+        <Center>
+          <Icon as={<Ionicons name={'settings-sharp'} />} color={'orange.500'} size='sm' />
         </Center>
       </Pressable>
     </HStack>

@@ -7,6 +7,7 @@ import { Register } from './pages/register';
 import { Friends } from './pages/friends';
 import { Profile } from './pages/profile';
 import { Notice } from './pages/notice';
+import { Settings } from './pages/settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
           <Stack.Screen name='Friends' component={Friends} />
           <Stack.Screen name='Profile' component={Profile} />
           <Stack.Screen name='Notice' component={Notice} />
+          <Stack.Screen name='Settings' component={Settings} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
