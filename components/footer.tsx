@@ -15,7 +15,7 @@ const Footer = (props: FooterProps) => {
     <HStack
       space={4}
       bg={'white'}
-      py={4}
+      py={3}
       borderColor='gray.300'
       borderTopWidth={1}
       alignItems='center'
@@ -32,19 +32,7 @@ const Footer = (props: FooterProps) => {
         }}
       >
         <Center>
-          <Icon as={<Ionicons name={'people'} />} color={'orange.500'} size='sm' />
-        </Center>
-      </Pressable>
-      <Pressable
-        flex={1}
-        opacity={active === 'notice' ? 1 : 0.5}
-        onPress={() => {
-          if (active === 'notice') return;
-          navigation.navigate('Notice');
-        }}
-      >
-        <Center>
-          <Icon as={<FontAwesome name={'bell'} />} color={'orange.500'} size='sm' />
+          <Icon as={<Ionicons name={'people'} />} color={'orange.500'} size={6} />
         </Center>
       </Pressable>
       <Pressable
@@ -56,7 +44,19 @@ const Footer = (props: FooterProps) => {
         }}
       >
         <Center>
-          <Icon as={<Ionicons name={'person'} />} color={'orange.500'} size='sm' />
+          <Icon as={<Ionicons name={'person'} />} color={'orange.500'} size={6} />
+        </Center>
+      </Pressable>
+      <Pressable
+        flex={1}
+        opacity={active === 'notice' ? 1 : 0.5}
+        onPress={() => {
+          if (active === 'notice') return;
+          navigation.navigate('Notice');
+        }}
+      >
+        <Center>
+          <Icon as={<FontAwesome name={'bell'} />} color={'orange.500'} size={6} />
         </Center>
       </Pressable>
       <Pressable
@@ -68,7 +68,7 @@ const Footer = (props: FooterProps) => {
         }}
       >
         <Center>
-          <Icon as={<Ionicons name={'settings-sharp'} />} color={'orange.500'} size='sm' />
+          <Icon as={<Ionicons name={'settings-sharp'} />} color={'orange.500'} size={6} />
         </Center>
       </Pressable>
     </HStack>
