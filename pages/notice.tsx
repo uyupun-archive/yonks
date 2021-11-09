@@ -1,109 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Fragment } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { ScrollView, Box, Center, Heading } from 'native-base';
 import { PageProps } from '../types';
 import { Footer } from '../components/footer';
 import { useFetcher } from '../hooks/useFetcher';
-import { color } from '../constants';
 
 interface Data {
-  name: string;
-  address: {
-    line: string;
-    twitter: string;
-  };
+  content: string;
 }
+
+const data: Data[] = new Array(10).fill({
+  content:
+    '山田太郎さんとマッチしました\n山田太郎さんの連絡先:\nTwitter: @hogehogeunko\nLINE: @hogehogeunko',
+});
 
 const Notice = (props: PageProps) => {
   const { navigation } = props;
   // TODO: APIリクエスト
   // const { data, isLoading, isError } = useFetcher('');
 
-  const data = [
-    {
-      name: '山田太郎',
-      address: {
-        line: 'test',
-        twitter: 'test',
-      },
-    },
-    {
-      name: '山田太郎',
-      address: {
-        line: 'test',
-        twitter: 'test',
-      },
-    },
-    {
-      name: '山田太郎',
-      address: {
-        line: 'test',
-        twitter: 'test',
-      },
-    },
-  ];
-
   const getNoticeList = (data: Data[]) => {
-    return data.map((item, index: number) => {
+    return data?.map((item, index: number) => {
       return (
-        <View key={index} style={styles.notice}>
-          <Text style={styles.text}>{item.name}さんとマッチしました。</Text>
-          <Text style={styles.text}>{item.name}さんの連絡先</Text>
-          {item.address.line && <Text style={styles.text}>LINE: {item.address.line}</Text>}
-          {item.address.twitter && <Text style={styles.text}>Twitter: {item.address.twitter}</Text>}
-        </View>
+        <Box
+          key={index}
+          borderColor='gray.300'
+          borderBottomWidth={data.length === index + 1 ? 0 : 1}
+          py={2}
+        >
+          {item.content}
+        </Box>
       );
     });
   };
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>通知</Text>
-        <ScrollView>
+      <Box flex={1} bg={'white'} safeArea>
+        <Center borderColor='gray.300' borderBottomWidth={1} pt={1} pb={2}>
+          <Heading size='sm'>通知</Heading>
+        </Center>
+        <ScrollView _contentContainerStyle={{ px: 8 }} mb={12}>
           {getNoticeList(data)}
           <StatusBar style='auto' />
         </ScrollView>
-      </SafeAreaView>
-      <Footer active={'notice'} navigation={navigation} />
+        <Footer active={'notice'} navigation={navigation} />
+      </Box>
     </>
   );
 };
-
-const noticeWidth = Dimensions.get('window').width - 40;
-const scrollViewHeight = Dimensions.get('window').height - 100;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.white,
-    alignItems: 'center',
-  },
-  scrollView: {
-    width: '100%',
-    height: scrollViewHeight,
-  },
-  header: {
-    width: '100%',
-    textAlign: 'center',
-    fontSize: 16,
-    paddingVertical: 12,
-    borderBottomColor: color.gray,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-  },
-  notice: {
-    width: noticeWidth,
-    alignSelf: 'flex-start',
-    paddingBottom: 10,
-    borderBottomColor: color.gray,
-    borderBottomWidth: 1,
-    marginBottom: 10,
-  },
-  text: {
-    marginBottom: 4,
-  },
-});
 
 export { Notice };
