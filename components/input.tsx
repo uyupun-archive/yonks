@@ -22,7 +22,6 @@ const Input = (props: Props) => {
         </Text>
         <NBInput
           type={type}
-          // size={size || 'lg'}
           h={'40px'}
           placeholder={placeholder}
           _focus={{

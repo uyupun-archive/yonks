@@ -52,12 +52,11 @@ const Profile = (props: PageProps) => {
               placeholder={'選択してください'}
               _item={{
                 _pressed: {
-                  backgroundColor: 'orange.300',
+                  bg: 'orange.300',
                 },
               }}
               _selectedItem={{
                 bg: 'orange.100',
-                // endIcon: <CheckIcon size='5' />,
               }}
               onValueChange={(value) => setStatus(value)}
             >
