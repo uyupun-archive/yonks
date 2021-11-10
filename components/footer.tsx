@@ -13,6 +13,7 @@ const Footer = (props: FooterProps) => {
 
   return (
     <HStack
+      w={'100%'}
       space={4}
       bg={'white'}
       py={3}
