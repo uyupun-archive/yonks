@@ -2,9 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import logo from '../assets/logo.png';
-import { ScrollView, Box, Center, Button, Image, Heading } from 'native-base';
+import { ScrollView, Box, Center, Image, Heading } from 'native-base';
 import { Input } from '../components/input';
 import { Link } from '../components/link';
+import { Button } from '../components/button';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
 
@@ -13,9 +14,14 @@ const Register = (props: PageProps) => {
 
   const [text, setText] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const register = async () => {
     try {
+      setIsLoading(true);
+      // ローディングを表示するために、仮に0.5秒待機する
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       // TODO: APIリクエスト
       // const res = await fetcher('', { method: 'POST' });
       // const data = await res.json();
@@ -23,6 +29,8 @@ const Register = (props: PageProps) => {
       navigation.navigate('Friends');
     } catch (error) {
       console.error('エラーです');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -51,22 +59,12 @@ const Register = (props: PageProps) => {
         />
         <Center>
           <Button
-            colorScheme={'orange'}
-            _text={{
-              color: 'white',
-              fontSize: 'md',
-              fontWeight: 'bold',
-            }}
-            w={'50%'}
+            text={'新規登録'}
             mb={8}
             isDisabled={!(text && password)}
-            _disabled={{
-              backgroundColor: 'orange.300',
-            }}
+            isLoading={isLoading}
             onPress={() => register()}
-          >
-            新規登録
-          </Button>
+          />
           <Link text={'ログインする'} onPress={() => navigation.navigate('Login')} />
         </Center>
         <StatusBar style='auto' />
