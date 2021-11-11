@@ -5,7 +5,7 @@ interface Props {
   text?: string;
   mb?: IButtonProps['mb'];
   href?: ILinkProps['href'];
-  onPress: IButtonProps['onPress'];
+  onPress?: IButtonProps['onPress'];
 }
 
 const Link = (props: Props) => {
