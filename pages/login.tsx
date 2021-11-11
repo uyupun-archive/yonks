@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import logo from '../assets/logo.png';
-import { ScrollView, Box, Center, Button, Text, Input, Image, Heading } from 'native-base';
+import { ScrollView, Box, Center, Button, Image, Heading } from 'native-base';
+import { Input } from '../components/input';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
 
@@ -39,33 +40,14 @@ const Login = (props: PageProps) => {
           />
           <Heading mb={6}>ログイン</Heading>
         </Center>
-        <Box mb={4}>
-          <Text fontSize={'md'} mb={1}>
-            ユーザID
-          </Text>
-          <Input
-            size='lg'
-            _focus={{
-              borderColor: 'orange.500',
-            }}
-            onChangeText={setText}
-            value={text}
-          />
-        </Box>
-        <Box mb={8}>
-          <Text fontSize={'md'} mb={1}>
-            パスワード
-          </Text>
-          <Input
-            type={'password'}
-            size='lg'
-            _focus={{
-              borderColor: 'orange.500',
-            }}
-            onChangeText={setPassword}
-            value={password}
-          />
-        </Box>
+        <Input text={'ユーザID'} mb={4} onChangeText={setText} value={text} />
+        <Input
+          type={'password'}
+          text={'パスワード'}
+          mb={8}
+          onChangeText={setPassword}
+          value={password}
+        />
         <Center>
           <Button
             colorScheme={'orange'}
