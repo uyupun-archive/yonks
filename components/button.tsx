@@ -7,7 +7,7 @@ interface Props {
   mb?: IButtonProps['mb'];
   isDisabled?: IButtonProps['isDisabled'];
   isLoading?: IButtonProps['isLoading'];
-  onPress: IButtonProps['onPress'];
+  onPress?: IButtonProps['onPress'];
 }
 
 const Button = (props: Props) => {

@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { ScrollView, Box, Center, Heading, Text, Select, CheckIcon } from 'native-base';
+import { ScrollView, Box, Center, Heading, Text, Select } from 'native-base';
+import { Button } from '../components/button';
 import { Input } from '../components/input';
 import { Footer } from '../components/footer';
 import { PageProps } from '../types';
@@ -70,6 +71,9 @@ const Profile = (props: PageProps) => {
           <Input text={'Twitter'} value={twitter} onChangeText={setTwitter} mb={4} />
           <Input text={'Instagram'} value={instagram} onChangeText={setInstagram} mb={4} />
           <Input text={'TikTok'} value={tikTok} onChangeText={setTikTok} mb={8} />
+          <Center>
+            <Button text={'プロフィールの保存'} w={'70%'} mb={8} />
+          </Center>
           <StatusBar style='auto' />
         </ScrollView>
         <Footer active={'profile'} navigation={navigation} />
