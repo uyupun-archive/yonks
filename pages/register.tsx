@@ -4,6 +4,7 @@ import { useState } from 'react';
 import logo from '../assets/logo.png';
 import { ScrollView, Box, Center, Button, Image, Heading } from 'native-base';
 import { Input } from '../components/input';
+import { Link } from '../components/link';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
 
@@ -66,18 +67,7 @@ const Register = (props: PageProps) => {
           >
             新規登録
           </Button>
-          <Button
-            variant={'link'}
-            colorScheme={'blue'}
-            _text={{
-              fontSize: 'md',
-              fontWeight: 'normal',
-              underline: true,
-            }}
-            onPress={() => navigation.navigate('Login')}
-          >
-            ログインする
-          </Button>
+          <Link text={'ログインする'} onPress={() => navigation.navigate('Login')} />
         </Center>
         <StatusBar style='auto' />
       </ScrollView>
