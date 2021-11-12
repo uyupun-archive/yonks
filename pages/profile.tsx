@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import { ScrollView, Box, Center, Heading, Text, Select } from 'native-base';
+import { Header } from '../components/header';
 import { Button } from '../components/button';
 import { Input } from '../components/input';
 import { Footer } from '../components/footer';
@@ -34,9 +35,7 @@ const Profile = (props: PageProps) => {
   return (
     <>
       <Box flex={1} bg={'white'} safeArea>
-        <Center borderColor='gray.300' borderBottomWidth={1} pt={1} pb={2}>
-          <Heading size='sm'>プロフィール</Heading>
-        </Center>
+        <Header text={'プロフィール'} />
         <ScrollView _contentContainerStyle={{ pt: 6, px: 8 }} mb={12}>
           <Text fontSize={'md'} mb={6}>
             ユーザID: {data.userId}

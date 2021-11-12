@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, Box, Center, Heading } from 'native-base';
+import { ScrollView, Box, Center } from 'native-base';
 import { PageProps } from '../types';
+import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { useFetcher } from '../hooks/useFetcher';
 
@@ -37,9 +38,7 @@ const Notice = (props: PageProps) => {
   return (
     <>
       <Box flex={1} bg={'white'} safeArea>
-        <Center borderColor='gray.300' borderBottomWidth={1} pt={1} pb={2}>
-          <Heading size='sm'>通知</Heading>
-        </Center>
+        <Header text={'通知'} />
         <ScrollView _contentContainerStyle={{ px: 8 }} mb={12}>
           {getNoticeList(data)}
           <StatusBar style='auto' />
