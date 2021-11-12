@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
-import { ScrollView, Box, Center, Pressable, Text, Icon, Image, Heading, Link } from 'native-base';
+import { ScrollView, Box, Center, Pressable, Text } from 'native-base';
+import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
@@ -11,9 +12,7 @@ const Settings = (props: PageProps) => {
 
   return (
     <Box flex={1} bg={'white'} safeArea>
-      <Center borderColor='gray.300' borderBottomWidth={1} pt={1} pb={2}>
-        <Heading size='sm'>設定</Heading>
-      </Center>
+      <Header text={'設定'} />
       <ScrollView>
         <Pressable
           py={2}
