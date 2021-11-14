@@ -10,10 +10,15 @@ import { Button } from '../components/button';
 import { Badge } from '../components/badge';
 import { useFetcher } from '../hooks/useFetcher';
 import { status as constantStatus } from '../constants';
+import { errorHandling } from '../middleware/auth';
 
 const Friends = (props: PageProps) => {
   const { navigation } = props;
-  const { data, isLoading, isError } = useFetcher('friends');
+  const { data, isLoading, error } = useFetcher('friends');
+
+  if (error) {
+    errorHandling(error, navigation);
+  }
 
   const [searchText, setSearchText] = useState<string>('');
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
@@ -32,7 +37,7 @@ const Friends = (props: PageProps) => {
   };
 
   const getFriends = (data: any) => {
-    return data.map((item: any, index: number) => {
+    return data?.map((item: any, index: number) => {
       return (
         <HStack
           key={index}

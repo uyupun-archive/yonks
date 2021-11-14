@@ -17,7 +17,7 @@ const data = {
 const Profile = (props: PageProps) => {
   const { navigation } = props;
   // TODO: APIリクエスト
-  // const { data, isLoading, isError } = useFetcher('');
+  // const { data, isLoading, error } = useFetcher('');
 
   const [name, setName] = useState<string>('');
   const [status, setStatus] = useState<string>('');

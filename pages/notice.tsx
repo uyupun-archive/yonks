@@ -5,6 +5,7 @@ import { PageProps } from '../types';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { useFetcher } from '../hooks/useFetcher';
+import { errorHandling } from '../middleware/auth';
 
 interface Data {
   content: string;
@@ -12,7 +13,11 @@ interface Data {
 
 const Notice = (props: PageProps) => {
   const { navigation } = props;
-  const { data, isLoading, isError } = useFetcher('notifications');
+  const { data, isLoading, error } = useFetcher('notifications');
+
+  if (error) {
+    errorHandling(error, navigation);
+  }
 
   const getNoticeList = (data: Data[]) => {
     return data?.map((item, index: number) => {
