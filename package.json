@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@react-native-async-storage/async-storage": "^1.15.11",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-picker/picker": "^2.1.0",
     "@react-navigation/native": "^6.0.6",
@@ -38,6 +39,7 @@
     "react-native-reanimated": "^2.2.3",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "^3.8.0",
+    "react-native-storage": "^1.0.1",
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5",
     "swr": "^1.0.1",
