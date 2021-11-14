@@ -4,7 +4,7 @@ import { Box, IBoxProps, Text, Input as NBInput, IInputProps } from 'native-base
 interface Props {
   text?: string;
   type?: IInputProps['type'];
-  size?: IInputProps['size'];
+  w?: IInputProps['w'];
   placeholder?: IInputProps['placeholder'];
   value?: IInputProps['value'];
   onChangeText?: IInputProps['onChangeText'];
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Input = (props: Props) => {
-  const { text, type, size, placeholder, value, onChangeText, mb } = props;
+  const { text, type, w, placeholder, value, onChangeText, mb } = props;
 
   if (text) {
     return (
@@ -22,6 +22,7 @@ const Input = (props: Props) => {
         </Text>
         <NBInput
           type={type}
+          w={w}
           h={'40px'}
           placeholder={placeholder}
           _focus={{
@@ -36,7 +37,8 @@ const Input = (props: Props) => {
     return (
       <NBInput
         type={type}
-        size={size || 'lg'}
+        w={w}
+        h={'40px'}
         placeholder={placeholder}
         _focus={{
           borderColor: 'orange.500',
