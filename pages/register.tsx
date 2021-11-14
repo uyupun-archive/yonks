@@ -2,18 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import logo from '../assets/logo.png';
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  Button,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Dimensions,
-} from 'react-native';
+import { ScrollView, Box, Center, Image, Heading } from 'native-base';
+import { Input } from '../components/input';
+import { Link } from '../components/link';
+import { Button } from '../components/button';
 import { PageProps } from '../types';
-import { color } from '../constants';
 import { fetcher } from '../utilities/fetcher';
 
 const Register = (props: PageProps) => {
@@ -21,81 +14,63 @@ const Register = (props: PageProps) => {
 
   const [text, setText] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const register = async () => {
     try {
+      setIsLoading(true);
+      // ローディングを表示するために、仮に0.5秒待機する
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       // TODO: APIリクエスト
       // const res = await fetcher('', { method: 'POST' });
       // const data = await res.json();
       // console.log(data);
-      navigation.navigate('Profile');
+      navigation.navigate('Friends');
     } catch (error) {
       console.error('エラーです');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Image source={logo} style={styles.logo} />
-      <Text style={styles.label}>ユーザID</Text>
-      <TextInput style={styles.input} onChangeText={setText} value={text} />
-      <Text style={styles.label}>パスワード</Text>
-      <TextInput secureTextEntry style={styles.input} onChangeText={setPassword} value={password} />
-      <TouchableOpacity
-        onPress={() => register()}
-        style={text && password ? styles.button : styles.buttonDisabled}
-        disabled={!(text && password)}
-      >
-        <Text>新規登録</Text>
-      </TouchableOpacity>
-      <Button title={'ログインする'} onPress={() => navigation.navigate('Login')} />
-      <StatusBar style='auto' />
-    </SafeAreaView>
+    <Box flex={1} bg={'white'} safeArea>
+      <ScrollView _contentContainerStyle={{ px: 8 }}>
+        <Center mb={4}>
+          <Image
+            source={logo}
+            alt={'yonks logo'}
+            w={'100%'}
+            h={120}
+            resizeMode={'contain'}
+            mt={'15%'}
+            mb={8}
+          />
+          <Heading mb={6}>新規登録</Heading>
+        </Center>
+        <Input size='lg' text={'ユーザID'} mb={4} onChangeText={setText} value={text} />
+        <Input
+          type={'password'}
+          text={'パスワード'}
+          mb={8}
+          onChangeText={setPassword}
+          value={password}
+        />
+        <Center>
+          <Button
+            text={'新規登録'}
+            mb={8}
+            isDisabled={!(text && password)}
+            isLoading={isLoading}
+            onPress={() => register()}
+          />
+          <Link text={'ログインする'} onPress={() => navigation.navigate('Login')} />
+        </Center>
+        <StatusBar style='auto' />
+      </ScrollView>
+    </Box>
   );
 };
-
-const inputWidth = Dimensions.get('window').width - 40;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.white,
-    alignItems: 'center',
-  },
-  logo: {
-    width: 250,
-    height: 130,
-    marginTop: 72,
-    marginBottom: 64,
-  },
-  label: {
-    alignSelf: 'flex-start',
-    paddingHorizontal: 20,
-    marginBottom: 4,
-  },
-  input: {
-    width: inputWidth,
-    height: 40,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: color.lightGray,
-    borderRadius: 4,
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: color.orange,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
-    borderRadius: 5,
-    marginBottom: 12,
-  },
-  buttonDisabled: {
-    backgroundColor: color.lightOrange,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
-    borderRadius: 5,
-    marginBottom: 12,
-  },
-});
 
 export { Register };

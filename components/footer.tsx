@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { HStack, Pressable, Center, Icon } from 'native-base';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { color } from '../constants';
 import { PageProps } from '../types';
 
 interface FooterProps {
-  active: 'friends' | 'notice' | 'profile';
+  active: 'friends' | 'notice' | 'profile' | 'settings';
   navigation: PageProps['navigation'];
 }
 
@@ -13,53 +12,68 @@ const Footer = (props: FooterProps) => {
   const { active, navigation } = props;
 
   return (
-    <View style={styles.footer}>
-      <Ionicons
-        name={'people'}
-        size={24}
-        color={active === 'friends' ? color.orange : color.lightOrange}
+    <HStack
+      w={'100%'}
+      space={4}
+      bg={'white'}
+      py={3}
+      borderColor='gray.300'
+      borderTopWidth={1}
+      alignItems='center'
+      position='absolute'
+      bottom={0}
+      safeAreaBottom
+    >
+      <Pressable
+        flex={1}
+        opacity={active === 'friends' ? 1 : 0.5}
         onPress={() => {
           if (active === 'friends') return;
           navigation.navigate('Friends');
         }}
-      />
-      <FontAwesome
-        name={'bell'}
-        size={24}
-        color={active === 'notice' ? color.orange : color.lightOrange}
-        onPress={() => {
-          if (active === 'notice') return;
-          navigation.navigate('Notice');
-        }}
-      />
-      <Ionicons
-        name={'person'}
-        size={24}
-        color={active === 'profile' ? color.orange : color.lightOrange}
+      >
+        <Center>
+          <Icon as={<Ionicons name={'people'} />} color={'orange.500'} size={6} />
+        </Center>
+      </Pressable>
+      <Pressable
+        flex={1}
+        opacity={active === 'profile' ? 1 : 0.5}
         onPress={() => {
           if (active === 'profile') return;
           navigation.navigate('Profile');
         }}
-      />
-    </View>
+      >
+        <Center>
+          <Icon as={<Ionicons name={'person'} />} color={'orange.500'} size={6} />
+        </Center>
+      </Pressable>
+      <Pressable
+        flex={1}
+        opacity={active === 'notice' ? 1 : 0.5}
+        onPress={() => {
+          if (active === 'notice') return;
+          navigation.navigate('Notice');
+        }}
+      >
+        <Center>
+          <Icon as={<FontAwesome name={'bell'} />} color={'orange.500'} size={6} />
+        </Center>
+      </Pressable>
+      <Pressable
+        flex={1}
+        opacity={active === 'settings' ? 1 : 0.5}
+        onPress={() => {
+          if (active === 'settings') return;
+          navigation.navigate('Settings');
+        }}
+      >
+        <Center>
+          <Icon as={<Ionicons name={'settings-sharp'} />} color={'orange.500'} size={6} />
+        </Center>
+      </Pressable>
+    </HStack>
   );
 };
-
-const styles = StyleSheet.create({
-  footer: {
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 16,
-    paddingHorizontal: 8,
-    backgroundColor: `${color.white}`,
-    borderTopColor: `${color.gray}`,
-    borderTopWidth: 1,
-  },
-});
 
 export { Footer };
