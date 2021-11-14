@@ -2,12 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import logo from '../assets/logo.png';
+import { Alert } from 'react-native';
 import { ScrollView, Box, Center, Image, Heading } from 'native-base';
 import { Input } from '../components/input';
 import { Link } from '../components/link';
 import { Button } from '../components/button';
 import { PageProps } from '../types';
-import { post } from '../utilities/fetcher';
+import { fetcher } from '../utilities/fetcher';
 
 const Login = (props: PageProps) => {
   const { navigation } = props;
@@ -18,14 +19,19 @@ const Login = (props: PageProps) => {
 
   const login = async () => {
     try {
-      await post('auth/login', {
+      const res = await fetcher('auth/login', {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, password }),
       });
+      // トークンを永続化する
       navigation.navigate('Friends');
-    } catch (error) {
-      console.log('エラーです');
+    } catch (error: any) {
+      if (error?.status === 401) {
+        Alert.alert('', 'ユーザIDまたは、パスワードが間違っています。', [{ text: 'OK' }]);
+      } else {
+        Alert.alert('', '通信エラーが発生しました。', [{ text: 'OK' }]);
+      }
     } finally {
       setIsLoading(false);
     }
