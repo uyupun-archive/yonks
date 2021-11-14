@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../assets/logo.png';
 import { Alert } from 'react-native';
 import { ScrollView, Box, Center, Image, Heading } from 'native-base';
@@ -9,6 +9,8 @@ import { Link } from '../components/link';
 import { Button } from '../components/button';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
+import { storage } from '../storage';
+import { loginUser } from '../middleware/auth';
 
 const Login = (props: PageProps) => {
   const { navigation } = props;
@@ -17,14 +19,18 @@ const Login = (props: PageProps) => {
   const [password, setPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    loginUser(navigation);
+  }, []);
+
   const login = async () => {
     try {
+      setIsLoading(true);
       const res = await fetcher('auth/login', {
         method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, password }),
       });
-      // トークンを永続化する
+      storage.save({ key: 'token', data: res.token });
       navigation.navigate('Friends');
     } catch (error: any) {
       if (error?.status === 401) {
