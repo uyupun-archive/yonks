@@ -10,7 +10,7 @@ import { Button } from '../components/button';
 import { PageProps } from '../types';
 import { fetcher } from '../utilities/fetcher';
 import { storage } from '../storage';
-import { loginUser } from '../middleware/auth';
+import { redirectFriendsPage } from '../middleware/auth';
 
 const Login = (props: PageProps) => {
   const { navigation } = props;
@@ -20,7 +20,7 @@ const Login = (props: PageProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    loginUser(navigation);
+    redirectFriendsPage(navigation);
   }, []);
 
   const login = async () => {
