@@ -12,6 +12,7 @@ export interface FetchOptions {
   headers?: {
     Accept?: string;
     'Content-Type'?: string;
+    Authorization?: string;
   };
   body?: string;
 }
