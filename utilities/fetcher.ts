@@ -1,12 +1,18 @@
 import { FetchOptions } from '../types';
 import { YONKS_API } from 'react-native-dotenv';
 
-export const fetcher = (url: string, options?: FetchOptions) => {
-  if (options) return fetch(url, options).then((res) => res.json());
-  return fetch(url).then((res) => res.json());
-};
+export interface ResponseError extends Error {
+  status?: number;
+}
 
-export const post = (url: string, options?: FetchOptions) => {
-  if (options) return fetch(YONKS_API + url, options).then((res) => res.json());
-  return fetch(YONKS_API + url).then((res) => res.json());
+export const fetcher = async (path: string, options: FetchOptions) => {
+  const error: ResponseError = new Error('通信エラーが発生しました。');
+
+  const res = await fetch(YONKS_API + path, options);
+  if (!res.ok) {
+    error.status = res.status;
+    throw error;
+  }
+
+  return res.json();
 };
