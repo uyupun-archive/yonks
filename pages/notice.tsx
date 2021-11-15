@@ -20,6 +20,12 @@ const Notice = (props: PageProps) => {
   }
 
   const getNoticeList = (data: Data[]) => {
+    if (!data.length) {
+      <Center py={2}>
+        <Text>通知はありません。</Text>
+      </Center>;
+    }
+
     return data?.map((item, index: number) => {
       return (
         <Box

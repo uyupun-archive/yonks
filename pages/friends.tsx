@@ -37,6 +37,14 @@ const Friends = (props: PageProps) => {
   };
 
   const getFriends = (data: any) => {
+    if (!data.length) {
+      return (
+        <Center>
+          <Text>友だちがいません。</Text>
+        </Center>
+      );
+    }
+
     return data?.map((item: any, index: number) => {
       return (
         <HStack
