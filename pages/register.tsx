@@ -31,6 +31,7 @@ const Register = (props: PageProps) => {
         body: JSON.stringify({ user_id: userId, password }),
       });
       storage.save({ key: 'token', data: res.token });
+      storage.save({ key: 'userId', data: userId });
       navigation.navigate('Profile');
     } catch (error: any) {
       console.log(error?.status);

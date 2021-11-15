@@ -9,6 +9,7 @@ export const redirectFriendsPage = async (navigation: PageProps['navigation']) =
 
 export const redirectLoginPage = async (navigation: PageProps['navigation']) => {
   storage.remove({ key: 'token' });
+  storage.remove({ key: 'userId' });
   navigation.navigate('Login');
 };
 

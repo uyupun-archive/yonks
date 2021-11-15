@@ -31,6 +31,7 @@ const Login = (props: PageProps) => {
         body: JSON.stringify({ user_id: userId, password }),
       });
       storage.save({ key: 'token', data: res.token });
+      storage.save({ key: 'userId', data: userId });
       navigation.navigate('Friends');
     } catch (error: any) {
       if (error?.status === 401) {
