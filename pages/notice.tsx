@@ -1,26 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, Box, Center } from 'native-base';
+import { ScrollView, Box, Center, Text } from 'native-base';
 import { PageProps } from '../types';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { useFetcher } from '../hooks/useFetcher';
+import { errorHandling } from '../middleware/auth';
 
 interface Data {
   content: string;
 }
 
-const data: Data[] = new Array(10).fill({
-  content:
-    '山田太郎さんとマッチしました\n山田太郎さんの連絡先:\nTwitter: @hogehogeunko\nLINE: @hogehogeunko',
-});
-
 const Notice = (props: PageProps) => {
   const { navigation } = props;
-  // TODO: APIリクエスト
-  // const { data, isLoading, isError } = useFetcher('');
+  const { data, isLoading, error } = useFetcher('notifications');
+
+  if (error) {
+    errorHandling(error, navigation);
+  }
 
   const getNoticeList = (data: Data[]) => {
+    if (!data.length) {
+      <Center py={2}>
+        <Text>通知はありません。</Text>
+      </Center>;
+    }
+
     return data?.map((item, index: number) => {
       return (
         <Box
@@ -36,16 +41,20 @@ const Notice = (props: PageProps) => {
   };
 
   return (
-    <>
-      <Box flex={1} bg={'white'} safeArea>
-        <Header text={'通知'} />
+    <Box flex={1} bg={'white'} safeArea>
+      <Header text={'通知'} />
+      {isLoading ? (
+        <Center pt={2} px={8}>
+          <Text>ローディング中...</Text>
+        </Center>
+      ) : (
         <ScrollView _contentContainerStyle={{ px: 8 }} mb={12}>
           {getNoticeList(data)}
           <StatusBar style='auto' />
         </ScrollView>
-        <Footer active={'notice'} navigation={navigation} />
-      </Box>
-    </>
+      )}
+      <Footer active={'notice'} navigation={navigation} />
+    </Box>
   );
 };
 

@@ -1,8 +1,8 @@
 import useSWR from 'swr';
-import { fetcher } from '../utilities/fetcher';
+import { profileFetcher } from '../utilities/fetcher';
 
-export const useFetcher = (path: string) => {
-  const { data, error } = useSWR(path, fetcher, {
+export const useProfileFetcher = () => {
+  const { data, error } = useSWR('profile/', profileFetcher, {
     onErrorRetry: (error) => {
       if (error) return;
     },
