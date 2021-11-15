@@ -32,9 +32,6 @@ export const profileFetcher = async (path: string) => {
     headers: headers,
   } as FetchOptions;
 
-  console.log(`${YONKS_API}profile/${userId}`);
-  console.log(options);
-
   const res = await fetch(`${YONKS_API}${path}${userId}`, options);
   if (!res.ok) {
     error.status = res.status;
