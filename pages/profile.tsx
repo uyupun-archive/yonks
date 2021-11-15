@@ -77,8 +77,6 @@ const Profile = (props: PageProps) => {
       });
       const res = await profileFetcher('profile/');
       updateProfile(res);
-      console.log('-----レスポンス-----');
-      console.log(res);
     } catch (error: any) {
       if (error?.status === 400 || error?.status === 404) {
         Alert.alert('', 'データに不備があります。', [{ text: 'OK' }]);

@@ -34,7 +34,6 @@ const Register = (props: PageProps) => {
       storage.save({ key: 'userId', data: userId });
       navigation.navigate('Profile');
     } catch (error: any) {
-      console.log(error?.status);
       if (error?.status === 400 || error?.status === 404) {
         Alert.alert('', 'そのユーザIDはすでに使用されています。', [{ text: 'OK' }]);
       } else if (error?.status === 401) {

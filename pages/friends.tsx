@@ -28,9 +28,8 @@ const Friends = (props: PageProps) => {
       setIsSearchLoading(true);
       // ローディングを表示するために、仮に0.5秒待機する
       await new Promise((resolve) => setTimeout(resolve, 500));
-      console.log(searchText);
     } catch {
-      console.error('エラーです');
+      // TODO: エラーアラートを表示する
     } finally {
       setIsSearchLoading(false);
     }
