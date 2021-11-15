@@ -1,24 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ScrollView, Box, Center, Heading, Text, Select } from 'native-base';
 import { Header } from '../components/header';
 import { Button } from '../components/button';
 import { Input } from '../components/input';
 import { Footer } from '../components/footer';
 import { PageProps } from '../types';
-import { useFetcher } from '../hooks/useFetcher';
+import { useProfileFetcher } from '../hooks/useProfileFetcher';
 import { status as statusObj } from '../constants';
-
-const data = {
-  userId: 'takashi0602',
-};
+import { storage } from '../storage';
 
 const Profile = (props: PageProps) => {
   const { navigation } = props;
-  // TODO: APIリクエスト
-  // const { data, isLoading, error } = useFetcher('');
+  const { data, isLoading, error } = useProfileFetcher();
 
+  console.log(data);
+
+  useEffect(() => {
+    getUserId();
+  }, []);
+
+  useEffect(() => {
+    if (!data || data.id === 0) return;
+    setName(data.name || '');
+    setStatus(data.status_id ? `${data.status_id}` : '');
+    setLine(data.sns_line || '');
+    setTwitter(data.sns_twitter || '');
+    setInstagram(data.sns_instagram || '');
+    setTikTok(data.sns_tiktok || '');
+  }, [data]);
+
+  const [userId, setUserId] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [status, setStatus] = useState<string>('');
   const [line, setLine] = useState<string>('');
@@ -32,13 +45,18 @@ const Profile = (props: PageProps) => {
     });
   };
 
+  const getUserId = async () => {
+    const id = await storage.load({ key: 'userId' });
+    if (id) setUserId(id);
+  };
+
   return (
     <>
       <Box flex={1} bg={'white'} safeArea>
         <Header text={'プロフィール'} />
         <ScrollView _contentContainerStyle={{ pt: 6, px: 8 }} mb={12}>
           <Text fontSize={'md'} mb={6}>
-            ユーザID: {data.userId}
+            ユーザID: {userId}
           </Text>
           <Input text={'名前'} value={name} onChangeText={setName} mb={4} />
           <Box mb={8}>
