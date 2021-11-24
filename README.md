@@ -7,6 +7,8 @@ $ git clone https://github.com/uyupun/yonks.git
 
 $ cd yonks
 
+$ cp .env.example .env
+
 $ yarn
 
 $ yarn start
