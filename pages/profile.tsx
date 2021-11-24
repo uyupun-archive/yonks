@@ -51,7 +51,13 @@ const Profile = (props: PageProps) => {
 
   const getSelectItem = () => {
     return Object.values(statusObj).map((label, index) => {
-      return <Select.Item key={index} label={label} value={`${index + 1}`} />;
+      let optionLabel = 'いそがしい';
+      if (label === 'either') {
+        optionLabel = 'どちらでも';
+      } else if (label === 'lonely') {
+        optionLabel = '人肌恋しい';
+      }
+      return <Select.Item key={index} label={optionLabel} value={`${index + 1}`} />;
     });
   };
 

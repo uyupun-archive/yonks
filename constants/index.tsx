@@ -14,3 +14,9 @@ export const status = {
   '2': 'either',
   '3': 'lonely',
 } as const;
+
+export const statusJa = {
+  busy: 'いそがしい',
+  '2': 'either',
+  '3': 'lonely',
+};
