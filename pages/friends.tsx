@@ -36,7 +36,7 @@ const Friends = (props: PageProps) => {
   };
 
   const getFriends = (data: any) => {
-    if (!data.length) {
+    if (!data?.length) {
       return (
         <Center>
           <Text>友だちがいません。</Text>
